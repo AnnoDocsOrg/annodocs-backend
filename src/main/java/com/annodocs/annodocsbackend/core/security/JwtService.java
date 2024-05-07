@@ -91,6 +91,15 @@ public class JwtService {
         return verifiedJWT.getSubject();
     }
 
+    @Transactional
+    public void invalidateRefreshTokens(String token) {
+        DecodedJWT decodedJWT = JWT.decode(token);
+        String email = decodedJWT.getSubject();
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new JWTVerificationException("User not found"));
+        user.setNewest_refresh_token(Instant.MAX);
+        userRepository.save(user);
+    }
+
     private Instant generateExpirationTimeIn(int minutes) {
         return LocalDateTime.now().plusMinutes(minutes).atZone(ZoneId.systemDefault()).toInstant();
     }

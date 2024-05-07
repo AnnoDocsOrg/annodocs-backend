@@ -1,6 +1,7 @@
 package com.annodocs.annodocsbackend.user.controller;
 
 import com.annodocs.annodocsbackend.core.responsewrapper.Response;
+import com.annodocs.annodocsbackend.core.security.JwtService;
 import com.annodocs.annodocsbackend.core.security.TokenDTO;
 import com.annodocs.annodocsbackend.user.UserEntity;
 import com.annodocs.annodocsbackend.user.controller.wsto.LoginWsTo;
@@ -27,6 +28,7 @@ public class UserController
 {
     private final UserCrudService userCrudService;
     private final AuthenticationService authenticationService;
+    private final JwtService jwtService;
 
     @Operation(summary = "Create a new user")
     @PostMapping("/create")
@@ -50,11 +52,15 @@ public class UserController
                 .maxAge(60 * 60 * 24 * 30) //30 days
                 .build();
 
-        //create response
-        return ResponseEntity
-                .ok()
-                .header("Set-Cookie", cookie.toString())
-                .body(Response.of(tokens.accessToken(), true));
+        if(registerRequest.rememberMe())
+            return ResponseEntity
+                    .ok()
+                    .header("Set-Cookie", cookie.toString())
+                    .body(Response.of(tokens.accessToken(), true));
+        else
+            return ResponseEntity
+                    .ok()
+                    .body(Response.of(tokens.accessToken(), true));
     }
 
     @Operation(summary = "Login user and return token")
@@ -70,10 +76,15 @@ public class UserController
                 .build();
 
         //create response
-        return ResponseEntity
-                .ok()
-                .header("Set-Cookie", cookie.toString())
-                .body(Response.of(tokens.accessToken(), true));
+        if(loginRequest.rememberMe())
+            return ResponseEntity
+                    .ok()
+                    .header("Set-Cookie", cookie.toString())
+                    .body(Response.of(tokens.accessToken(), true));
+        else
+            return ResponseEntity
+                    .ok()
+                    .body(Response.of(tokens.accessToken(), true));
     }
 
     @Operation(summary = "get new access token with refresh token")
@@ -94,18 +105,34 @@ public class UserController
                 .body(Response.of(tokens.accessToken(), true));
     }
 
+    @Operation(summary = "Logout user")
+    @PostMapping("/logout")
+    public ResponseEntity<Response> logoutUser(@CookieValue(name = "refreshToken") String refreshToken)
+    {
+        jwtService.invalidateRefreshTokens(refreshToken);
+
+        ResponseCookie cookie = ResponseCookie.from("refreshToken", "")
+                .httpOnly(true)
+                .path("/api/v1/user/refresh")
+                .maxAge(0)
+                .build();
+
+        return ResponseEntity
+                .ok()
+                .header("Set-Cookie", cookie.toString())
+                .body(Response.of("Logged out", true));
+    }
+
     @GetMapping("/mockfunc")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @Operation(
-            security = { @SecurityRequirement(name = "Authorization") },
+            security = {@SecurityRequirement(name = "Authorization")},
             description = "Returns the users email"
     )
     public ResponseEntity<Response> mockfunc()
     {
         return ResponseEntity.ok(Response.of(authenticationService.getCurrentUser().getEmail(), true));
     }
-
-
 
 
 }
