@@ -1,2 +1,0 @@
-secret:
-    key: ${JWT_SECRET_KEY:supersecretjwtkeyannodocsdb1877688789234667234}

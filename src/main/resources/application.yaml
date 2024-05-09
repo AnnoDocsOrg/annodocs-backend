@@ -1,0 +1,19 @@
+springdoc:
+  api-docs:
+    path: /api-path
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+server:
+  port: 8080
+  address: 0.0.0.0
+
+frontend:
+  url: http://localhost:5173
+
+backend:
+  url: http://localhost:8080
+
+secret:
+  key: ${JWT_SECRET_KEY:supersecretjwtkeyannodocsdb1877688789234667234}
