@@ -1,0 +1,38 @@
+{
+    "name": "BGB",
+    "anlage": "Anlage A",
+    "paragraphen": [
+        {
+            "title": "Beginn der Rechtsfähigkeit",
+            "paragraph": "§ 1",
+            "text": [
+                "Die Rechtsfähigkeit des Menschen beginnt mit der Vollendung der Geburt."
+            ],
+            "footnotes": "",
+            "notes": "",
+            "url": "https://www.gesetze-im-internet.de/bgb/__1.html"
+        },
+        {
+            "title": "Eintritt der Volljährigkeit",
+            "paragraph": "§ 2",
+            "text": [
+                "Die Volljährigkeit tritt mit der Vollendung des 18. Lebensjahres ein."
+            ],
+            "footnotes": "",
+            "notes": "",
+            "url": "https://www.gesetze-im-internet.de/bgb/__2.html"
+        },
+        {
+            "title": "Wohnsitz; Begründung und Aufhebung",
+            "paragraph": "§ 7",
+            "text": [
+                "(1) Wer sich an einem Orte ständig niederlässt, begründet an diesem Ort seinen Wohnsitz.",
+                "(2) Der Wohnsitz kann gleichzeitig an mehreren Orten bestehen.",
+                "(3) Der Wohnsitz wird aufgehoben, wenn die Niederlassung mit dem Willen aufgehoben wird, sie aufzugeben."
+            ],
+            "footnotes": "",
+            "notes": "",
+            "url": "https://www.gesetze-im-internet.de/bgb/__7.html"
+        }
+    ]
+}

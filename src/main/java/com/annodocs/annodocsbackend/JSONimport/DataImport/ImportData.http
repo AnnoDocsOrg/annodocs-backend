@@ -1,0 +1,2 @@
+### Test HTTP Request um die Datei im DataImport Ordner zu importieren. Datei Pfad Anpassen ums selber zu testen
+GET http://localhost:8080/import?filePath=C:\Users\adria\IdeaProjects\annodocs-backend\src\main\java\com\annodocs\annodocsbackend\JSONimport\DataImport\bgb.json
