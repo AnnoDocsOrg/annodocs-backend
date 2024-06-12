@@ -1,9 +1,12 @@
 package com.annodocs.annodocsbackend.gesetz.paragraph;
 
+import com.annodocs.annodocsbackend.annotation.AnnotationEntity;
 import com.annodocs.annodocsbackend.gesetz.gesetzEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "paragraph")
@@ -12,6 +15,8 @@ public class paragraphEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long PiD;
 
+    @OneToMany(mappedBy = "paragraph", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AnnotationEntity> annotations;
 
     @Setter
     @Getter
@@ -31,6 +36,11 @@ public class paragraphEntity {
     @Getter
     @Column(columnDefinition = "TEXT")
     private String text;
+
+    @Setter
+    @Getter
+    @OneToMany(mappedBy = "paragraph", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TextAbschnitt> textAbschnitte;
 
     @Setter
     @Getter

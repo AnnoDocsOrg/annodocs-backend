@@ -1,5 +1,6 @@
 package com.annodocs.annodocsbackend.user;
 
+import com.annodocs.annodocsbackend.annotation.AnnotationEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,10 @@ public class UserEntity implements UserDetails
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Setter
+    @Getter
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AnnotationEntity> annotations;
     @Column(nullable = false)
     protected String password;
     @Column(nullable = false, unique = true)
