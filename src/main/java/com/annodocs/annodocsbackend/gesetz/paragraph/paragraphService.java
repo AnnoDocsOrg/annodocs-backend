@@ -14,4 +14,8 @@ public class paragraphService {
     public Optional<paragraphEntity> getParagraph(Long id) {
         return paragraphRepository.findById(id);
     }
+
+    public void saveParagraph(paragraphEntity paragraph) {
+        paragraphRepository.save(paragraph);
+    }
 }
