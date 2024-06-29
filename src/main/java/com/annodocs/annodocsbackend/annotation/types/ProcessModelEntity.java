@@ -10,13 +10,6 @@ import lombok.Setter;
 @DiscriminatorValue("PROCESS_MODEL")
 public class ProcessModelEntity extends AnnotationEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @Setter
-    @Getter
-    private Long id;
-
     @Setter
     @Getter
     private String bpmnXml;

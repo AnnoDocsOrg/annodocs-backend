@@ -12,14 +12,7 @@ import java.util.Set;
 @DiscriminatorValue("FORM")
 public class FormEntity extends AnnotationEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @Setter
-    @Getter
-    private Long id;
-
     @OneToMany(mappedBy = "form", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<FormField> formFields;
+    private Set<FormGroup> formGroups;
 
 }

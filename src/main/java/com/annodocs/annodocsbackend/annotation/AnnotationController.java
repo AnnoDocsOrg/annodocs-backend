@@ -27,8 +27,7 @@ public class AnnotationController {
                 decisionTree.setDatum(annotationDTO.getDatum());
                 decisionTree.setUser(annotationDTO.getUser());
                 decisionTree.setParagraph(annotationDTO.getParagraph());
-                decisionTree.setParent(annotationDTO.getParent());
-                decisionTree.setChildren(annotationDTO.getChildren());
+                decisionTree.setTreeNodes(annotationDTO.getChildren());
 
                 annotationService.saveAnnotation(decisionTree);
 

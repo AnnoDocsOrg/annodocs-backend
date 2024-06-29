@@ -4,39 +4,32 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "tree_nodes")
+@Table(name = "tree_node")
+@Getter
+@Setter
 public class TreeNode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @Setter
-    @Getter
     private Long id;
 
-    @Setter
-    @Getter
-    @Column(name = "node_data", nullable = false, columnDefinition = "TEXT")
-    private String nodeData;
+    private String node_data;
 
-    @Setter
-    @Getter
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<TreeNode> children;
+    @ManyToOne
+    @JoinColumn(name = "DecisionTreeAnnotationID")
+    private DecisionTreeEntity decisionTree;
 
-    @Setter
-    @Getter
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "parent_id")
     private TreeNode parent;
 
-    @Setter
-    @Getter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "decision_tree_id")
-    private DecisionTreeEntity decisionTree;
+    @OneToMany(mappedBy = "parent")
+    private List<TreeNode> children = new ArrayList<>();
+
 
 }
